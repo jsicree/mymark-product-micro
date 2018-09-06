@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - sudo update-ca-certificates -f
+  pre_build:
+    commands:
+      - echo Running maven clean
+      - mvn -f mymarkall/pom.xml clean
+  build:
+    commands:
+      - echo Build started
+      - mvn -f mymarkapi/pom.xml install -DskipTests
+      - mvn -f mymarkapp/pom.xml install -DskipTests
+      - mvn -f mymarkservice/pom.xml install -DskipTests
+      
+  post_build:
+    commands:
+      - mv mymarkservice/target/mymarkservice.war mymarkservice.war
+      - mkdir .ebextensions
+      - mv mymarkservice/.ebextensions/* .ebextensions/
+
+artifacts:
+  files:
+    - mymarkservice.war
+    - .ebextensions/**/*
