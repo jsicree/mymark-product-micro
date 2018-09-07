@@ -1,0 +1,92 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:tns="http://product.mymark.com/api" targetNamespace="http://product.mymark.com/api"
+	elementFormDefault="qualified" jaxb:version="2.0">
+
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:globalBindings>
+				<jaxb:javaType name="java.util.Calendar" xmlType="xs:date"
+					parseMethod="javax.xml.bind.DatatypeConverter.parseDate"
+					printMethod="javax.xml.bind.DatatypeConverter.printDate" />
+			</jaxb:globalBindings>
+		</xs:appinfo>
+	</xs:annotation>
+
+	<xs:complexType name="ApiFieldError">
+		<xs:sequence>
+			<xs:element name="code" type="xs:string" />
+			<xs:element name="field" type="xs:string" />
+			<xs:element name="message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ApiGlobalError">
+		<xs:sequence>
+			<xs:element name="code" type="xs:string" />
+			<xs:element name="message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="ErrorResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="fieldErrors" type="tns:ApiFieldError" maxOccurs="unbounded" minOccurs="0" />
+				<xs:element name="globalErrors" type="tns:ApiGlobalError" maxOccurs="unbounded" minOccurs="0" />				
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>	
+
+	<xs:complexType name="ProductDto">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="productCode" type="xs:string" />
+			<xs:element name="price" type="xs:double" />
+			<xs:element name="shortDescription" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ProductDtoList">
+		<xs:sequence>
+			<xs:element name="products" type="tns:ProductDto" maxOccurs="unbounded" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ProductDetailsDto">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="productCode" type="xs:string" />
+			<xs:element name="price" type="xs:double" />
+			<xs:element name="shortDescription" type="xs:string" />
+			<xs:element name="longDescription" type="xs:string" />
+			<xs:element name="availableInventory" type="xs:long" />			
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="ProductsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="products" type="tns:ProductDtoList" />
+			</xs:sequence>
+		</xs:complexType>	
+	</xs:element>
+
+	<xs:element name="ProductDetailsRequest">
+		<xs:complexType>
+			<xs:sequence>
+			<xs:element name="productCode" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ProductDetailsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="productDetails" type="tns:ProductDetailsDto" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>
