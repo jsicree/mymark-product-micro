@@ -89,4 +89,49 @@
 		</xs:complexType>
 	</xs:element>
 
+	<xs:complexType name="InventoryDto">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="productCode" type="xs:string" />
+			<xs:element name="sku" type="xs:string" />
+			<xs:element name="price" type="xs:double" />
+			<xs:element name="inProcessDate" type="xs:date" />
+			<xs:element name="sellDate" type="xs:date" />
+			<xs:element name="returnDate" type="xs:date" />			
+			<xs:element name="status" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="InventoryDtoList">
+		<xs:sequence>
+			<xs:element name="inventory" type="tns:InventoryDto" maxOccurs="unbounded" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="ProductInventoryResponse">
+		<xs:complexType>
+			<xs:sequence>
+			<xs:element name="inventory" type="tns:InventoryDtoList" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateInventoryRequest">
+		<xs:complexType>
+			<xs:sequence>
+			<xs:element name="sku" type="xs:string" />
+			<xs:element name="newStatus" type="xs:string" />
+			<xs:element name="statusDate" type="xs:date" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateInventoryResponse">
+		<xs:complexType>
+			<xs:sequence>
+			<xs:element name="inventory" type="tns:InventoryDto" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
 </xs:schema>

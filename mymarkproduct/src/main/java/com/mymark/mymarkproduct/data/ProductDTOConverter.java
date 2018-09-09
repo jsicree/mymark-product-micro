@@ -1,11 +1,18 @@
 package com.mymark.mymarkproduct.data;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
+import com.mymark.mymarkproduct.data.domain.InventoryItem;
 import com.mymark.mymarkproduct.data.domain.Product;
+import com.mymark.product.api.InventoryDto;
+import com.mymark.product.api.InventoryDtoList;
 import com.mymark.product.api.ProductDetailsDto;
 import com.mymark.product.api.ProductDto;
+import com.mymark.product.api.ProductInventoryResponse;
 
 
 public final class ProductDTOConverter {
@@ -41,6 +48,29 @@ public final class ProductDTOConverter {
 			dto.setLongDescription(p.getLongDescription());
 			dto.setAvailableInventory(count);
 			return dto;
+		}
+
+		public static InventoryDto toInventoryDto(InventoryItem item) {
+			InventoryDto dto = new InventoryDto();
+			dto.setId(item.getId());
+//			dto.setInProcessDate(item.getInProcessDate());
+//			dto.setReturnDate(item.getReturnDate());
+//			dto.setSellDate(item.getSellDate());
+			dto.setPrice(item.getProduct().getPrice());
+			dto.setSku(item.getSku());
+			dto.setStatus(item.getStatus().name());
+			
+			return dto;
+		}
+
+		public static InventoryDtoList toInventoryDtoList(List<InventoryItem> itemList) {
+
+			InventoryDtoList dtoList = new InventoryDtoList();
+			
+			for (InventoryItem i : itemList) {
+				dtoList.getInventory().add(toInventoryDto(i));				
+			}
+			return dtoList;
 		}
 
 }
