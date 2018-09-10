@@ -17,8 +17,8 @@ phases:
       
   post_build:
     commands:
-      - mv mymarkproduct/target/mymarkproductmicro.war mymarkproductmicro.war
+      - mv mymarkproduct/target/mymarkproductmicro.jar mymarkproductmicro.jar
 
 artifacts:
   files:
-    - mymarkproductmicro.war
+    - mymarkproductmicro.jar
