@@ -7,18 +7,18 @@ phases:
   pre_build:
     commands:
       - echo Running maven clean
-      - mvn -f mymarkcustomer/pom.xml clean
-      - mvn -f mymarkcustomerapi/pom.xml clean
+      - mvn -f mymarkproduct/pom.xml clean
+      - mvn -f mymarkproductapi/pom.xml clean
   build:
     commands:
       - echo Build started
-      - mvn -f mymarkcustomerapi/pom.xml install -DskipTests
-      - mvn -f mymarkcustomer/pom.xml install -DskipTests
+      - mvn -f mymarkproductapi/pom.xml install -DskipTests
+      - mvn -f mymarkproduct/pom.xml install -DskipTests
       
   post_build:
     commands:
-      - mv mymarkcustomer/target/mymarkcustomermicro.war mymarkcustomermicro.war
+      - mv mymarkproduct/target/mymarkproductmicro.war mymarkproductmicro.war
 
 artifacts:
   files:
-    - mymarkcustomermicro.war
+    - mymarkproductmicro.war
