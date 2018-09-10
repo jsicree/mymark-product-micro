@@ -64,6 +64,7 @@ public class ProductServiceController {
 			prodList = (ArrayList<Product>) productService.getAllProducts();
 			ProductDtoList dtoList = new ProductDtoList();
 			dtoList.getProducts().addAll(ProductDTOConverter.toProductDtoList(prodList));
+			log.info("getProducts returning " + dtoList.getProducts().size() + " products.");
 			response.setProducts(dtoList);
 		} catch (ProductServiceException e) {
 			log.error("ProductServiceException thrown while getting all products.", e);
