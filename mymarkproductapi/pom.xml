@@ -16,7 +16,7 @@
 		<spring-framework.version>5.0.4.RELEASE</spring-framework.version>
 
 		<!-- Jackson JSON Mapper -->
-		<jackson.version>2.9.3</jackson.version>
+		<jackson.version>2.9.7</jackson.version>
 
         <!-- JUnit -->
         <junit.version>4.11</junit.version>
